@@ -2,90 +2,102 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:8080/api';
 
-const api = axios.create({
-  baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-export const login = async (username, password) => {
-  try {
-    const response = await api.post('/auth/login', { username, password });
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
+export const getInventory = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/inventory`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching inventory:', error);
+        throw error;
+    }
 };
 
-export const getInventoryList = async () => {
-  try {
-    const response = await api.get('/inventory');
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
+export const updateInventory = async (item) => {
+    try {
+        const response = await axios.put(`${API_URL}/inventory`, item);
+        return response.data;
+    } catch (error) {
+        console.error('Error updating inventory:', error);
+        throw error;
+    }
 };
 
-export const getInventoryItem = async (itemId) => {
-  try {
-    const response = await api.get(`/inventory/${itemId}`);
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
+export const createInventoryItem = async (item) => {
+    try {
+        const response = await axios.post(`${API_URL}/inventory`, item);
+        return response.data;
+    } catch (error) {
+        console.error('Error creating inventory item:', error);
+        throw error;
+    }
 };
 
-export const addInventoryItem = async (item) => {
-  try {
-    const response = await api.post('/inventory', item);
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
-
-export const updateInventoryItem = async (itemId, item) => {
-  try {
-    const response = await api.put(`/inventory/${itemId}`, item);
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
-
-export const deleteInventoryItem = async (itemId) => {
-  try {
-    const response = await api.delete(`/inventory/${itemId}`);
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
+export const deleteInventoryItem = async (productId) => {
+    try {
+        const response = await axios.delete(`${API_URL}/inventory/${productId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error deleting inventory item:', error);
+        throw error;
+    }
 };
 
 export const getRestockingAlerts = async () => {
-  try {
-    const response = await api.get('/alerts');
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
+    try {
+        const response = await axios.get(`${API_URL}/alerts/restocking`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching restocking alerts:', error);
+        throw error;
+    }
 };
 
-export const acknowledgeRestockingAlert = async (alertId) => {
-  try {
-    const response = await api.put(`/alerts/${alertId}`);
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
+export const createRestockingAlert = async (alert) => {
+    try {
+        const response = await axios.post(`${API_URL}/alerts/restocking`, alert);
+        return response.data;
+    } catch (error) {
+        console.error('Error creating restocking alert:', error);
+        throw error;
+    }
+};
+
+export const deleteRestockingAlert = async (alertId) => {
+    try {
+        const response = await axios.delete(`${API_URL}/alerts/restocking/${alertId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error deleting restocking alert:', error);
+        throw error;
+    }
 };
 
 export const getSalesTrends = async () => {
-  try {
-    const response = await api.get('/sales/trends');
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
+    try {
+        const response = await axios.get(`${API_URL}/sales/trends`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching sales trends:', error);
+        throw error;
+    }
+};
+
+export const createSalesRecord = async (record) => {
+    try {
+        const response = await axios.post(`${API_URL}/sales`, record);
+        return response.data;
+    } catch (error) {
+        console.error('Error creating sales record:', error);
+        throw error;
+    }
+};
+
+export const deleteSalesRecord = async (salesId) => {
+    try {
+        const response = await axios.delete(`${API_URL}/sales/${salesId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error deleting sales record:', error);
+        throw error;
+    }
 };
