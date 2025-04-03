@@ -1,12 +1,25 @@
 import React from 'react';
-import Routes from './routes';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Container, CssBaseline } from '@mui/material';
+import Navigation from './components/Navigation';
+import Inventory from './components/Inventory';
+import RestockingAlerts from './components/RestockingAlerts';
+import SalesTrends from './components/SalesTrends';
 
-const App = () => {
-  return (
-    <div>
-      <Routes />
-    </div>
-  );
-};
+function App() {
+    return (
+        <Router>
+            <CssBaseline />
+            <Navigation />
+            <Container>
+                <Routes>
+                    <Route path="/" element={<Inventory />} />
+                    <Route path="/alerts" element={<RestockingAlerts />} />
+                    <Route path="/sales" element={<SalesTrends />} />
+                </Routes>
+            </Container>
+        </Router>
+    );
+}
 
 export default App;
