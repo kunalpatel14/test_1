@@ -4,10 +4,10 @@ const API_URL = 'http://localhost:8080/api';
 
 export const getInventory = async () => {
     try {
-        const response = await axios.get(`${API_URL}/inventory`);
+        const response = await axios.get(`${API_URL}/inventoryItems`);
         return response.data;
     } catch (error) {
-        console.error('Error fetching inventory:', error);
+        console.error('Error fetching inventory details:', error);
         throw error;
     }
 };
